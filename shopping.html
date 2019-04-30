@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+	<title>My Parse App</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="My Parse App">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+	<title>namseoul shopping mall</title>
+
+	<style type="text/css">
+
+		.context {text-align: center;}
+
+		p{width :25%;
+			margin: : 0 auto;
+			margin-top : 20px;}
+
+			.original{
+				color : blue;
+			}
+			
+	</style>
+
+</head>
+
+
+<body class="is-preload">
+				<header id="header">
+				<a class="logo" href="shopping.html">NamSeoul Shopping Mall</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="shopping.html">Home</a></li>
+					<li><a href="signup.html">signup</a></li>
+					<li><a href="category.html">category</a></li>
+				</ul>
+			</nav>
+
+			<section id="banner">
+				<div class="inner">
+					<h1>NamSeoul Shopping Mall</h1>
+			</section>
+</div> 
+
+	<div class="context">
+	<h1>남서울 쇼핑몰에 오신것을 환영합니다!!</h1>
+	<img src="cloth.jpg", width="20%">
+	<p class="original">
+	</p>
+	<div id="login">
+		<input type="text", id="id">
+		<input type="password", id="password">
+		<input type="button", value="LOGIN" onclick="login()">
+		<input type="button" value="SIGNUP" onclick="signup()">
+		<input type="button" value="category" onclick="category()">
+	</div>
+	<img src="raspberry.jpg", width="1500" height="300" border="10">
+	<script type="text/javascript">
+		parse.initialize("songminseok");
+		Parse.sercerURL= "https://songminseok.herokuapp.com/parse"
+
+		function signup(){
+			window.location = "signup.html";
+		}
+
+		function category(){
+			window.location = "category.html";
+		}
+
+		function login(){
+			var id = $("#id").val();
+			var pw = $("#password").val();
+
+			Parse.User.login(id, password)
+			.then((user) => {
+				alert("Login Success : Welcome! " + user.get("username"));
+				window.location = "main.html";
+			}, (error) => {
+				alert("login error : " +error.message);
+				$("#password").val("");
+			});
+		}
+	</script>
+
+
+</body>
+</html>

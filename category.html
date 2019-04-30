@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>My Parse App</title>
+	<meta name="description" content="My Parse App">
+	<meta name="viewport" content="width=device-width">
+
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+	<title>namseoul shopping mall</title>
+
+	<style type="text/css">
+		
+		.context {text-align: center;}
+
+		p{width :25%;
+			margin: : 0 auto;
+			margin-top : 20px;}
+
+			.original{
+				color : blue;
+			}
+			
+	</style>
+</head>
+
+
+<body>
+	<div category = "man">
+		<div class="context">
+	<h1>원하시는 종류의 옷을 고르세요</h1>
+	<img src="power.jpg", width="250" height="1000" align="left">
+	<img src="ment.jpg", width="250" height="1000" align="right">
+	<h2>남성</h2>
+		<input type="button" value="아우터" onclick="아우터()">
+		<img src="outer.jpg", width="18%" height="380">
+		<input type="button" value="이너" onclick="이너()">
+		<img src="inner.jpg", width="20%">
+		<input type="button" value="바지" onclick="바지()">
+		<img src="pants.jpg", width="16%">
+	</div>
+
+	<div category = "woman">
+		<div class="context">
+	<h1>여성</h1>
+		<input type="button" value="아우터" onclick="아우터()">
+		<img src="wouter.jpg", width="15%">
+		<input type="button" value="이너" onclick="이너()">
+		<img src="winner.jpg", width="20%">
+		<input type="button" value="바지" onclick="바지()">
+		<img src="wpants.jpg", width="20%">
+	</div>
+
+	<script type="text/javascript">
+		parse.initialize("songminseok");
+		Parse.serverURL = "https://songminseok.herokuapp.com/parse"
+
+		function category(){
+			var id = $("#id").val();
+			var password = $("#password").val();
+			var email = $("email").val();
+			var user = new parse.User();
+			var body = new parse.body();
+
+			if(Parse.User.current()){
+				Parse.User.logout();
+			}
+
+			if(id && password && email){
+				user.set("username", id);
+				user.set("password", password);
+				user.set("email", email);
+				user.set("body" , body);
+
+				user.signup()
+				.then((user) => {
+					alert("SignUp Success");
+					window.location = "shopping.html"
+				}, (error) => {
+					alert("SignUp Error : " + error.message);
+				});
+			}
+			else {
+				alert("wrong data");
+			}
+		}
+	</script>

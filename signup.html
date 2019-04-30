@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title>My Parse App</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="My Parse App">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="keywords" content="" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+
+	<title>namseoul shopping mall sign up page</title>
+	<style type="text/css">
+
+		.context {text-align: center;}
+
+		p{width :25%;
+			margin: : 0 auto;
+			margin-top : 20px;}
+
+			.original{
+				color : blue;
+			}
+			
+	</style>
+</head>
+<body>
+	<section id="banner">
+				<div class="inner">
+					<h1>NamSeoul Shopping Mall sign up page</h1>
+			</section>
+</div> 
+	<div id ="login">
+		<p> id : <input type="text" id="id"> </p>
+		<p> pw : <input type="text" id="password"> </p>
+		<p> email : <input type="text" id="email"> </p>
+		<p> top("S, M, L, XL, 2XL, 3XL") : <input type="text" id="top"> </p>
+		<p> bottom("25~35") : <input type="number" id="bottom"> </p>
+		<input type="button" value="SIGNUP" onclick="signup()">
+	</div>
+
+	<script type="text/javascript">
+		parse.initialize("songminseok");
+		Parse.serverURL = "https://songminseok.herokuapp.com/parse"
+
+		function signup(){
+			var id = $("#id").val();
+			var password = $("#password").val();
+			var email = $("email").val();
+			var user = new parse.User();
+			var body = new parse.body();
+
+			if(Parse.User.current()){
+				Parse.User.logout();
+			}
+
+			if(id && password && email){
+				user.set("username", id);
+				user.set("password", password);
+				user.set("email", email);
+				user.set("body" , body);
+
+				user.signup()
+				.then((user) => {
+					alert("SignUp Success");
+					window.location = "shopping.html"
+				}, (error) => {
+					alert("SignUp Error : " + error.message);
+				});
+			}
+			else {
+				alert("wrong data");
+			}
+		}
+	</script>
+</body>
